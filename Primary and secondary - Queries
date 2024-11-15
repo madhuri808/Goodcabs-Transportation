@@ -48,13 +48,10 @@ from fact_trips
 where  passenger_type = "repeated"
 group by passenger_type , city_id
 order by passenger_type  )
-
 select p, c ,
 cte1.a/cte2.a1 as pasenger_rating,
 cte1.b/cte2.b1 as driver_rating
 from cte1
- join cte2 using 
-(p,c)
-;
+join cte2 using (p,c);
 
 
