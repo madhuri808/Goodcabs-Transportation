@@ -1,1 +1,40 @@
+Q1) Query :- 
+
+(select city_id, c.city_name, sum(total_passengers) as "no.of trips" from fact_passenger_summary f
+join dim_city c 
+using (city_id)
+group by city_id
+order  by sum(total_passengers) desc
+limit 3)
+union all
+(select city_id, c.city_name, sum(total_passengers) as "no.of trips" from fact_passenger_summary f
+join dim_city c 
+using (city_id)
+group by city_id
+order  by sum(total_passengers) 
+limit 3)
+
+Q2) Query :-
+
+(select city_id,c.city_name,round(avg(fare_amount),2)as avg_fare_amt, 
+round(avg(fare_amount)/avg(distance_travelled_km),2) as amt_per_distance
+from fact_trips
+join dim_city c
+using (city_id)
+group by city_id
+order by avg_fare_amt desc
+limit 3)
+union 
+(select city_id,c.city_name,round(avg(fare_amount),2)as avg_fare_amt, 
+round(avg(fare_amount)/avg(distance_travelled_km),2) as amt_per_distance
+from fact_trips
+join dim_city c
+using (city_id)
+group by city_id
+order by avg_fare_amt 
+limit 3)
+
+Q3) Query :-
+
+
 
