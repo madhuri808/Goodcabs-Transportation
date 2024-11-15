@@ -36,5 +36,25 @@ limit 3)
 
 Q3) Query :-
 
+with cte1 as
+(select  passenger_type as p , city_id as c, avg(passenger_rating)  as a ,avg(driver_rating) as b
+from fact_trips
+where passenger_type = "new" 
+group by passenger_type , city_id 
+order by passenger_type ),
+cte2 as
+(select passenger_type as p , city_id as c, avg(passenger_rating) as a1,avg(driver_rating) as b1
+from fact_trips
+where  passenger_type = "repeated"
+group by passenger_type , city_id
+order by passenger_type  )
+
+select p, c ,
+cte1.a/cte2.a1 as pasenger_rating,
+cte1.b/cte2.b1 as driver_rating
+from cte1
+ join cte2 using 
+(p,c)
+;
 
 
