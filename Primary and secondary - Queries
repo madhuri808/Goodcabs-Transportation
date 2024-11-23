@@ -1,18 +1,11 @@
 Q1) Query :- 
 
-(select city_id, c.city_name, sum(total_passengers) as "no.of trips" from fact_passenger_summary f
-join dim_city c 
-using (city_id)
+select c.city_name,count(trip_id) as total_trips
+from  fact_trips f
+join dim_city c
+using(city_id)
 group by city_id
-order  by sum(total_passengers) desc
-limit 3)
-union all
-(select city_id, c.city_name, sum(total_passengers) as "no.of trips" from fact_passenger_summary f
-join dim_city c 
-using (city_id)
-group by city_id
-order  by sum(total_passengers) 
-limit 3)
+order by total_trips desc;
 
 Q2) Query :-
 
