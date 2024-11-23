@@ -28,6 +28,19 @@ using(city_id)
 group by city_id,passenger_type;
 
 Q4) Query :-
+select 
+c.city_name , d.month_name as mn, 
+count(trip_id) as total_trips
+from fact_trips f
+join dim_city c
+using(city_id)
+join dim_date d
+using(date)
+group by city_name ,mn
+
+Q5) Query :-
+
+
 
 
 
