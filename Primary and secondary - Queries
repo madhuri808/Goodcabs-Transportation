@@ -19,49 +19,17 @@ order by avg_fare_per_trip desc;
 
 Q3) Query :-
 
-(with cte1 as
-(select  passenger_type  p , city_id  c, avg(passenger_rating)   a ,avg(driver_rating)  b
-from fact_trips
-where passenger_type = "new" 
-group by passenger_type , city_id 
-order by passenger_type ),
-cte2 as
-(select passenger_type  p , city_id  c, avg(passenger_rating) a1,avg(driver_rating) b1
-from fact_trips
-where  passenger_type = "repeated"
-group by passenger_type , city_id
-order by passenger_type  )
-select  cte2.c ,
-round( a/b,2) as new_pasenger_avg_rating,
-round(cte2.a1/cte2.b1,2) as repeated_passenger_avg_rating
-from cte1
-join cte2 using 
-(c)
-order by new_pasenger_avg_rating desc
-limit 3)
-union
-(with cte1 as
-(select  passenger_type  p , city_id  c, avg(passenger_rating)   a ,avg(driver_rating)  b
-from fact_trips
-where passenger_type = "new" 
-group by passenger_type , city_id 
-order by passenger_type ),
-cte2 as
-(select passenger_type  p , city_id  c, avg(passenger_rating) a1,avg(driver_rating) b1
-from fact_trips
-where  passenger_type = "repeated"
-group by passenger_type , city_id
-order by passenger_type  )
-select  cte2.c ,
-round( a/b,2) as new_pasenger_avg_rating,
-round(cte2.a1/cte2.b1,2) as repeated_passenger_avg_rating
-from cte1
-join cte2 using 
-(c)
-order by new_pasenger_avg_rating 
-limit 3);
+select c.city_name, city_id ,passenger_type,
+round(avg(passenger_rating),2) as passenger_rating ,
+round(avg(driver_rating),2) as driver_rating
+from fact_trips f
+join dim_city c 
+using(city_id)
+group by city_id,passenger_type;
 
 Q4) Query :-
+
+
 
 
 
