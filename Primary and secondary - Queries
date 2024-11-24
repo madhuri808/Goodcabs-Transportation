@@ -51,6 +51,17 @@ using(city_id)
 group by city_name,day_type;
 
 Q6) Query :-
+select c.city_name,
+trip_count, 
+sum(repeat_passenger_count) as repeat_passenger,
+concat( round(trip_count*100/sum(trip_count) over(partition by city_name) ,2)," %") as pct_contribution
+from dim_repeat_trip_distribution
+join dim_city c 
+using(city_id)
+group by trip_count, city_name
+
+Q7) Query :-
+
 
 
 
