@@ -39,6 +39,20 @@ using(date)
 group by city_name ,mn
 
 Q5) Query :-
+select city_name, 
+day_type,count(trip_id) as no_of_trips, 
+concat( round(count(trip_id)*100/sum(count(trip_id)) over(partition by city_name) ,2)," %")
+as pct_contribution
+from dim_date 
+join fact_trips f
+using(date)
+join dim_city c
+using(city_id)
+group by city_name,day_type;
+
+Q6) Query :-
+
+
 
 
 
