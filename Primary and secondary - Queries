@@ -60,37 +60,5 @@ join dim_city c
 using(city_id)
 group by trip_count, city_name
 
-Q7) Query :-
-
-
-Secondary Questions :-
-
-Q1) Query :- (select city_id,city_name, sum(total_passengers) as total_passengers,sum(repeat_passengers) as repeat_passengers,
-concat(round(sum(repeat_passengers)/sum(total_passengers)*100,2)," %") as repeat_passenger_rates
-from fact_passenger_summary
-join dim_city 
-using(city_id)
-group by city_id,city_name
-order by concat(round(sum(repeat_passengers)/sum(total_passengers)*100,2)," %") desc
-limit 2)
-union
-(select city_id,city_name, sum(total_passengers) as total_passengers,sum(repeat_passengers) as repeat_passengers,
-concat(round(sum(repeat_passengers)/sum(total_passengers)*100,2)," %") as repeat_passenger_rates
-from fact_passenger_summary
-join dim_city
-using (city_id)
-group by city_id,city_name
-order by concat(round(sum(repeat_passengers)/sum(total_passengers)*100,2)," %")
-limit 2);
-
-Q2) Query :- 
-
-
-
-
-
-
-
-
 
 
